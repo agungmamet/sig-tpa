@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.1.35-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win32
--- HeidiSQL Version:             10.1.0.5464
+-- Server version:               10.1.38-MariaDB - mariadb.org binary distribution
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.5.0.5196
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -21,16 +21,17 @@ CREATE TABLE IF NOT EXISTS `administrator` (
   `id_admin` int(11) NOT NULL AUTO_INCREMENT,
   `nama_admin` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `hak_akses` int(11) NOT NULL,
   PRIMARY KEY (`id_admin`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table sig_tpa.administrator: ~1 rows (approximately)
-DELETE FROM `administrator`;
+-- Dumping data for table sig_tpa.administrator: ~2 rows (approximately)
 /*!40000 ALTER TABLE `administrator` DISABLE KEYS */;
-INSERT INTO `administrator` (`id_admin`, `nama_admin`, `username`, `password`, `hak_akses`) VALUES
-	(2, 'Rachmat Agung', 'rachmat', 'rachmat', 1);
+REPLACE INTO `administrator` (`id_admin`, `nama_admin`, `username`, `password`, `hak_akses`) VALUES
+	(6, 'Masadi Naym', 'masadi23', '$2y$10$CFNKxA7olEA1Hts67T5ZOev5HeVG6pgdH0WnvlHrWscFlRqYm7/7i', 2),
+	(7, 'Mamet Sembada', 'mamet08', '$2y$10$DENWHI7gz7OpgjqOZp.Rgun1aDWroME5JorPI5Y5xmShnfjl3i.4C', 1),
+	(8, 'Aufal Situmorang', 'aufalmarom', '$2y$10$G66A8euUh7jjVGT16pGO/.LttcJp7L1EF9.9Na5sqhvgRiCzYGr/K', 3);
 /*!40000 ALTER TABLE `administrator` ENABLE KEYS */;
 
 -- Dumping structure for table sig_tpa.bobot_parameter
@@ -42,9 +43,8 @@ CREATE TABLE IF NOT EXISTS `bobot_parameter` (
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.bobot_parameter: ~7 rows (approximately)
-DELETE FROM `bobot_parameter`;
 /*!40000 ALTER TABLE `bobot_parameter` DISABLE KEYS */;
-INSERT INTO `bobot_parameter` (`id_bobot`, `nama_parameter`, `nilai_bobot`) VALUES
+REPLACE INTO `bobot_parameter` (`id_bobot`, `nama_parameter`, `nilai_bobot`) VALUES
 	(1, 'kelerengan', 10),
 	(2, 'penggunaan lahan', 20),
 	(3, 'rawan longsor', 15),
@@ -59,12 +59,11 @@ CREATE TABLE IF NOT EXISTS `daerah_tpa` (
   `id_daerah` int(11) NOT NULL AUTO_INCREMENT,
   `nama_daerah` varchar(50) NOT NULL,
   PRIMARY KEY (`id_daerah`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.daerah_tpa: ~14 rows (approximately)
-DELETE FROM `daerah_tpa`;
 /*!40000 ALTER TABLE `daerah_tpa` DISABLE KEYS */;
-INSERT INTO `daerah_tpa` (`id_daerah`, `nama_daerah`) VALUES
+REPLACE INTO `daerah_tpa` (`id_daerah`, `nama_daerah`) VALUES
 	(1, 'Bodeh'),
 	(2, 'Ulujami'),
 	(3, 'Comal'),
@@ -78,7 +77,8 @@ INSERT INTO `daerah_tpa` (`id_daerah`, `nama_daerah`) VALUES
 	(11, 'Moga'),
 	(12, 'Pulosari'),
 	(13, 'Watukumpul'),
-	(14, 'Belik');
+	(14, 'Belik'),
+	(15, 'Maos');
 /*!40000 ALTER TABLE `daerah_tpa` ENABLE KEYS */;
 
 -- Dumping structure for table sig_tpa.data_curah_hujan
@@ -92,9 +92,8 @@ CREATE TABLE IF NOT EXISTS `data_curah_hujan` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_curah_hujan: ~14 rows (approximately)
-DELETE FROM `data_curah_hujan`;
 /*!40000 ALTER TABLE `data_curah_hujan` DISABLE KEYS */;
-INSERT INTO `data_curah_hujan` (`id_curah_hujan`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_curah_hujan` (`id_curah_hujan`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 2, '1500-2750', 4),
 	(2, 2, 2, '1500-2750', 4),
 	(3, 3, 2, '1500-2750', 4),
@@ -122,9 +121,8 @@ CREATE TABLE IF NOT EXISTS `data_hidrogeologi` (
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_hidrogeologi: ~14 rows (approximately)
-DELETE FROM `data_hidrogeologi`;
 /*!40000 ALTER TABLE `data_hidrogeologi` DISABLE KEYS */;
-INSERT INTO `data_hidrogeologi` (`id_hidrogeologi`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_hidrogeologi` (`id_hidrogeologi`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 2, 'air tanah langka', 5),
 	(2, 2, 0, 'akuifer produktif', 5),
 	(3, 3, 0, 'akuifer produktif', 5),
@@ -152,9 +150,8 @@ CREATE TABLE IF NOT EXISTS `data_jenis_tanah` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_jenis_tanah: ~14 rows (approximately)
-DELETE FROM `data_jenis_tanah`;
 /*!40000 ALTER TABLE `data_jenis_tanah` DISABLE KEYS */;
-INSERT INTO `data_jenis_tanah` (`id_jenis_tanah`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_jenis_tanah` (`id_jenis_tanah`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 0, 'gromosol', 6),
 	(2, 2, 3, 'alluvial', 6),
 	(3, 3, 3, 'alluvial', 6),
@@ -182,9 +179,8 @@ CREATE TABLE IF NOT EXISTS `data_kelerengan` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_kelerengan: ~14 rows (approximately)
-DELETE FROM `data_kelerengan`;
 /*!40000 ALTER TABLE `data_kelerengan` DISABLE KEYS */;
-INSERT INTO `data_kelerengan` (`id_kelerengan`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_kelerengan` (`id_kelerengan`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 3, '8-15%', 1),
 	(2, 2, 4, '0-8%', 1),
 	(3, 3, 4, '0-8%', 1),
@@ -212,9 +208,8 @@ CREATE TABLE IF NOT EXISTS `data_penggunaan_lahan` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_penggunaan_lahan: ~14 rows (approximately)
-DELETE FROM `data_penggunaan_lahan`;
 /*!40000 ALTER TABLE `data_penggunaan_lahan` DISABLE KEYS */;
-INSERT INTO `data_penggunaan_lahan` (`id_penggunaan_lahan`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_penggunaan_lahan` (`id_penggunaan_lahan`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 4, 'industri', 2),
 	(2, 2, 2, 'sawah/ladang/tambak', 2),
 	(3, 3, 3, 'kebun/lapangan', 2),
@@ -242,9 +237,8 @@ CREATE TABLE IF NOT EXISTS `data_rawan_banjir` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_rawan_banjir: ~14 rows (approximately)
-DELETE FROM `data_rawan_banjir`;
 /*!40000 ALTER TABLE `data_rawan_banjir` DISABLE KEYS */;
-INSERT INTO `data_rawan_banjir` (`id_rawan_banjir`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_rawan_banjir` (`id_rawan_banjir`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 0, 'rawan banjir', 7),
 	(2, 2, 0, 'rawan banjir', 7),
 	(3, 3, 0, 'rawan banjir', 7),
@@ -272,9 +266,8 @@ CREATE TABLE IF NOT EXISTS `data_rawan_longsor` (
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table sig_tpa.data_rawan_longsor: ~14 rows (approximately)
-DELETE FROM `data_rawan_longsor`;
 /*!40000 ALTER TABLE `data_rawan_longsor` DISABLE KEYS */;
-INSERT INTO `data_rawan_longsor` (`id_rawan_longsor`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
+REPLACE INTO `data_rawan_longsor` (`id_rawan_longsor`, `id_daerah`, `nilai_klasifikasi`, `keterangan`, `id_bobot`) VALUES
 	(1, 1, 0, 'tinggi', 3),
 	(2, 2, 2, 'rendah', 3),
 	(3, 3, 2, 'rendah', 3),
